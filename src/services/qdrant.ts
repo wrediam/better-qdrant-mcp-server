@@ -13,11 +13,11 @@ export class DefaultQdrantService implements QdrantService {
 
   async listCollections(): Promise<string[]> {
     try {
-      console.log('Attempting to connect to Qdrant server using direct fetch...');
+      console.error('Attempting to connect to Qdrant server using direct fetch...');
       
       // Use direct fetch instead of the client
       const collectionsUrl = `${this.url}/collections`;
-      console.log(`Fetching from: ${collectionsUrl}`);
+      console.error(`Fetching from: ${collectionsUrl}`);
       
       const response = await fetch(collectionsUrl, {
         method: 'GET',
@@ -38,7 +38,7 @@ export class DefaultQdrantService implements QdrantService {
           collections: Array<{ name: string }> 
         } 
       };
-      console.log('Successfully retrieved collections:', data);
+      console.error('Successfully retrieved collections:', data);
       
       return data.result.collections.map(c => c.name);
     } catch (error) {
@@ -53,11 +53,11 @@ export class DefaultQdrantService implements QdrantService {
 
   async createCollection(name: string, vectorSize: number): Promise<void> {
     try {
-      console.log('Attempting to create Qdrant collection using direct fetch...');
+      console.error('Attempting to create Qdrant collection using direct fetch...');
       
       // Use direct fetch instead of the client
       const createUrl = `${this.url}/collections/${name}`;
-      console.log(`Fetching from: ${createUrl}`);
+      console.error(`Fetching from: ${createUrl}`);
       
       const response = await fetch(createUrl, {
         method: 'PUT',
@@ -80,7 +80,7 @@ export class DefaultQdrantService implements QdrantService {
       }
       
       const data = await response.json();
-      console.log('Successfully created collection:', data);
+      console.error('Successfully created collection:', data);
     } catch (error) {
       console.error('Error in createCollection:', error);
       if (error instanceof Error) {
@@ -96,11 +96,11 @@ export class DefaultQdrantService implements QdrantService {
     documents: { id: string; vector: number[]; payload: Record<string, any> }[]
   ): Promise<void> {
     try {
-      console.log('Attempting to add documents to Qdrant collection using direct fetch...');
+      console.error('Attempting to add documents to Qdrant collection using direct fetch...');
       
       // Use direct fetch instead of the client
       const upsertUrl = `${this.url}/collections/${collection}/points`;
-      console.log(`Fetching from: ${upsertUrl}`);
+      console.error(`Fetching from: ${upsertUrl}`);
       
       const points = documents.map(doc => ({
         id: doc.id,
@@ -127,7 +127,7 @@ export class DefaultQdrantService implements QdrantService {
       }
       
       const data = await response.json();
-      console.log('Successfully added documents:', data);
+      console.error('Successfully added documents:', data);
     } catch (error) {
       console.error('Error in addDocuments:', error);
       if (error instanceof Error) {
@@ -140,11 +140,11 @@ export class DefaultQdrantService implements QdrantService {
 
   async deleteCollection(name: string): Promise<void> {
     try {
-      console.log('Attempting to delete Qdrant collection using direct fetch...');
+      console.error('Attempting to delete Qdrant collection using direct fetch...');
       
       // Use direct fetch instead of the client
       const deleteUrl = `${this.url}/collections/${name}`;
-      console.log(`Fetching from: ${deleteUrl}`);
+      console.error(`Fetching from: ${deleteUrl}`);
       
       const response = await fetch(deleteUrl, {
         method: 'DELETE',
@@ -161,7 +161,7 @@ export class DefaultQdrantService implements QdrantService {
       }
       
       const data = await response.json();
-      console.log('Successfully deleted collection:', data);
+      console.error('Successfully deleted collection:', data);
     } catch (error) {
       console.error('Error in deleteCollection:', error);
       if (error instanceof Error) {
@@ -178,11 +178,11 @@ export class DefaultQdrantService implements QdrantService {
     limit: number = 10
   ): Promise<SearchResult[]> {
     try {
-      console.log('Attempting to search Qdrant collection using direct fetch...');
+      console.error('Attempting to search Qdrant collection using direct fetch...');
       
       // Use direct fetch instead of the client
       const searchUrl = `${this.url}/collections/${collection}/points/search`;
-      console.log(`Fetching from: ${searchUrl}`);
+      console.error(`Fetching from: ${searchUrl}`);
       
       const response = await fetch(searchUrl, {
         method: 'POST',
@@ -214,7 +214,7 @@ export class DefaultQdrantService implements QdrantService {
         }> 
       };
       
-      console.log('Successfully retrieved search results:', data);
+      console.error('Successfully retrieved search results:', data);
       
       return data.result.map(result => {
         const searchResult: SearchResult = {
@@ -263,7 +263,7 @@ export function createQdrantService(url: string, apiKey?: string): QdrantService
     clientConfig.prefix = urlObj.pathname;
   }
   
-  console.log('Creating Qdrant client with config:', clientConfig);
+  console.error('Creating Qdrant client with config:', clientConfig);
   const client = new QdrantClient(clientConfig);
 
   return new DefaultQdrantService(client, url, apiKey);
