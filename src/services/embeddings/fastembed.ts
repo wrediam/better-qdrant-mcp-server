@@ -30,7 +30,8 @@ export class FastEmbedService extends BaseEmbeddingService {
     // The fastembed library's embed() returns an AsyncGenerator that yields batches of embeddings
     for await (const batch of this.embedder.embed(texts)) {
       for (const embedding of batch) {
-        // Convert Float32Array to number[] for proper JSON serialization
+        // Convert to plain number[] for proper JSON serialization
+        // Array.from() handles both Float32Array and regular arrays safely
         embeddings.push(Array.from(embedding));
       }
     }
