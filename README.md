@@ -2,6 +2,10 @@
 
 A Model Context Protocol (MCP) server for enhanced Qdrant vector database functionality. This server provides tools for managing Qdrant collections, adding documents, and performing semantic searches.
 
+<a href="https://glama.ai/mcp/servers/@wrediam/better-qdrant-mcp-server">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@wrediam/better-qdrant-mcp-server/badge" alt="Better Qdrant Server MCP server" />
+</a>
+
 ## Features
 
 - **List Collections**: View all available Qdrant collections
