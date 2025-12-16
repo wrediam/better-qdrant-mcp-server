@@ -269,6 +269,7 @@ class BetterQdrantServer {
         type: args.embeddingService,
         apiKey: process.env[`${args.embeddingService.toUpperCase()}_API_KEY`],
         endpoint: process.env[`${args.embeddingService.toUpperCase()}_ENDPOINT`],
+        model: process.env[`${args.embeddingService.toUpperCase()}_MODEL`],
       });
 
       // Generate embeddings
@@ -324,6 +325,7 @@ class BetterQdrantServer {
         type: args.embeddingService,
         apiKey: process.env[`${args.embeddingService.toUpperCase()}_API_KEY`],
         endpoint: process.env[`${args.embeddingService.toUpperCase()}_ENDPOINT`],
+        model: process.env[`${args.embeddingService.toUpperCase()}_MODEL`],
       });
 
       // Generate query embedding
