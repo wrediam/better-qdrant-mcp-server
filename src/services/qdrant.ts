@@ -104,7 +104,8 @@ export class DefaultQdrantService implements QdrantService {
       
       const points = documents.map(doc => ({
         id: doc.id,
-        vector: doc.vector,
+        // Ensure vector is a plain number[] array for proper JSON serialization
+        vector: Array.from(doc.vector),
         payload: doc.payload,
       }));
       
@@ -192,7 +193,8 @@ export class DefaultQdrantService implements QdrantService {
         // @ts-ignore - node-fetch supports timeout
         timeout: 5000, // 5 second timeout
         body: JSON.stringify({
-          vector,
+          // Ensure vector is a plain number[] array for proper JSON serialization
+          vector: Array.from(vector),
           limit,
           with_payload: true,
           with_vector: true

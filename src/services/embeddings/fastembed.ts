@@ -26,8 +26,15 @@ export class FastEmbedService extends BaseEmbeddingService {
       throw new Error('FastEmbed embedder not initialized');
     }
 
-    const embeddings = await this.embedder.embed(texts);
-    return embeddings.map((embedding: Float32Array) => Array.from(embedding));
+    const embeddings: number[][] = [];
+    // The fastembed library's embed() returns an AsyncGenerator that yields batches of embeddings
+    for await (const batch of this.embedder.embed(texts)) {
+      for (const embedding of batch) {
+        // Convert Float32Array to number[] for proper JSON serialization
+        embeddings.push(Array.from(embedding));
+      }
+    }
+    return embeddings;
   }
 
   protected requiresApiKey(): boolean {
