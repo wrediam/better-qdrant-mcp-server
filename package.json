@@ -8,7 +8,7 @@
     "better-qdrant-mcp-server": "build/index.js"
   },
   "scripts": {
-    "build": "tsc && chmod +x build/index.js",
+    "build": "tsc && npx shx chmod +x build/index.js",
     "start": "node build/index.js",
     "dev": "tsc -w",
     "clean": "rm -rf build",
@@ -41,6 +41,7 @@
   "devDependencies": {
     "@types/node": "^22.0.0",
     "@types/uuid": "^9.0.8",
+    "shx": "^0.4.0",
     "typescript": "^5.8.0"
   },
   "engines": {
