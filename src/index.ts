@@ -45,7 +45,7 @@ class BetterQdrantServer {
     this.server = new Server(
       {
         name: 'better-qdrant',
-        version: '0.1.1',
+        version: '0.2.0',
       },
       {
         capabilities: {

@@ -3,20 +3,25 @@ import { BaseEmbeddingService } from './base.js';
 export class FastEmbedService extends BaseEmbeddingService {
   // FastEmbed models typically produce 384-dimensional embeddings
   readonly vectorSize = 384;
-  private readonly defaultModel = 'BAAI/bge-small-en';
+  private readonly defaultModel = 'BAAI/bge-small-en-v1.5';
   private embedder: any = null;
 
   constructor(model?: string) {
-    super(undefined, undefined, model || 'BAAI/bge-small-en');
+    super(undefined, undefined, model || 'BAAI/bge-small-en-v1.5');
   }
 
   private async initializeEmbedder(): Promise<void> {
     if (!this.embedder) {
-      // Dynamic import to handle CommonJS module
-      const fastembed = await import('fastembed');
-      this.embedder = new fastembed.FastEmbed({
-        model: this.model || this.defaultModel
-      });
+      // Dynamic import — cast to any to avoid NodeNext resolution picking up stale types
+      const fastembed = await import('fastembed') as any;
+      const FlagEmbedding = fastembed.FlagEmbedding;
+      const EmbeddingModel = fastembed.EmbeddingModel;
+      const modelName = this.model || this.defaultModel;
+      // Map string model name to EmbeddingModel enum value, fallback to BGESmallENV15
+      const modelEnum = Object.values(EmbeddingModel as Record<string, string>).includes(modelName)
+        ? modelName
+        : EmbeddingModel.BGESmallENV15;
+      this.embedder = await FlagEmbedding.init({ model: modelEnum });
     }
   }
 

@@ -55,3 +55,6 @@ coverage/
 
 # Yarn Integrity file
 .yarn-integrity
+
+# FastEmbed model cache
+local_cache/

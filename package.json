@@ -1,6 +1,6 @@
 {
   "name": "better-qdrant-mcp-server",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "MCP server for enhanced Qdrant vector database functionality",
   "type": "module",
   "main": "build/index.js",
@@ -29,21 +29,19 @@
   "author": "Will Reeves <will@wredia.com>",
   "license": "MIT",
   "dependencies": {
-    "@langchain/community": "^0.3.36",
     "@langchain/textsplitters": "^0.1.0",
-    "@modelcontextprotocol/sdk": "^1.7.0",
-    "@qdrant/js-client-rest": "^1.7.0",
-    "axios": "^1.6.7",
-    "dotenv": "^16.4.5",
-    "fastembed": "^1.1.0",
-    "langchain": "^0.3.19",
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "@qdrant/js-client-rest": "^1.18.0",
+    "axios": "^1.16.1",
+    "dotenv": "^16.6.1",
+    "fastembed": "^2.1.0",
     "node-fetch": "^3.3.2",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "@types/node": "^20.11.24",
+    "@types/node": "^22.0.0",
     "@types/uuid": "^9.0.8",
-    "typescript": "^5.3.3"
+    "typescript": "^5.8.0"
   },
   "engines": {
     "node": ">=18.0.0"
